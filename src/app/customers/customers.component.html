@@ -1,0 +1,77 @@
+<section class="content-header"></section>
+<div class="row datatable-content-class custom-tables">
+
+    <div class="col-xl-12">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Customer List</h3>
+                </div>
+                <div class="card-body">
+
+                    <div class="search-div">
+
+                        <select class="rows-records" (change)="Rows($event.target.value)">
+                            <option selected value="100">100</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                            <option value="10000">10000</option>
+                        </select>
+
+                        <input class="search-api" type="text" placeholder="Search"
+                            (input)="SearchSP($event.target.value)">
+
+                    </div>
+
+
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Status</th>
+                                <th>Online</th>
+                                <th>Action</th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="CustomerList.length==0">
+                            <tr>
+                                <td class="text-center font-italic" colspan="8">Fetching records, please wait</td>
+                            </tr>
+                        <tbody *ngIf="CustomerList.length!=0">
+                            <tr *ngFor="let cust of CustomerList; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td><strong>{{ cust.name }}</strong></td>
+                                <td>{{ cust.email }}</td>
+                                <td>{{ cust.mobile }}</td>
+                                <td>
+                                    {{
+                                    cust.status == 1
+                                    ? 'Active'
+                                    : 'Profile Pending'
+                                    }}
+                                </td>
+                                <td>
+                                    {{
+                                    cust.loginStatus == 1
+                                    ? 'Online'
+                                    : 'Offline'
+                                    }}
+                                </td>
+
+                                <td>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

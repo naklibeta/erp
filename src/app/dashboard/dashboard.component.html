@@ -1,0 +1,151 @@
+<div class="mt-10">
+
+    <div class="row ">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Today Orders</h4>
+                    <div class="text-right">
+                        <h2 class="font-light m-b-0"><i class="ti-arrow-up text-success"></i>
+                            ₹{{DashboardData.today_revenue}}</h2>
+                        <span class="text-muted">Todays Income</span>
+                    </div>
+                    <!-- <span class="text-success">80%</span>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 80%; height: 6px;"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Weekly Orders</h4>
+                    <div class="text-right">
+                        <h2 class="font-light m-b-0"><i class="ti-arrow-up text-info"></i>
+                            ₹{{DashboardData.week_orders}}
+                        </h2>
+                        <span class="text-muted">Week Income</span>
+                    </div>
+                    <!-- <span class="text-info">30%</span>
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%; height: 6px;"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center">
+                        <h4 class="card-title">Revenue Statics</h4>
+                        <div class="ml-auto">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <h6 class="text-muted"><i class="fa fa-circle m-r-5 text-info"></i>Sin(x)</h6>
+                                </li>
+                                <li class="list-inline-item">
+                                    <h6 class="text-muted"><i class="fa fa-circle m-r-5 text-success"></i>Cos(x)</h6>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="height:300px;" class="m-t-20">
+                        <canvas baseChart height="130" [datasets]="lineChartData" [labels]="lineChartLabels"
+                            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                            [chartType]="lineChartType">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row -->
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center">
+                        <h4 class="card-title mb-0">Recent Processed Payments</h4>
+                    </div>
+                    <div class="table-responsive m-t-40">
+                        <table class="table stylish-table">
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Service Provider</th>
+                                    <th>Total Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor='let dataPayments of DashboardData.recent_payment'>
+
+                                    <td>{{dataPayments.serviceName}} </td>
+                                    <td>{{dataPayments.serviceProviderName}}</td>
+                                    <td>₹{{dataPayments.total_amount}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row -->
+
+<!-- <div class="row">
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <img class="card-img-top img-responsive" src="assets/images/big/img1.jpg" alt="Card">
+            <div class="card-body">
+                <ul class="list-inline d-flex font-14">
+                    <li class="p-l-0 mr-3">20 May 2016</li>
+                    <li>
+                        <a href="javascript:void(0)" class="link">3 Comment</a>
+                    </li>
+                </ul>
+                <h3 class="font-normal">Featured Hydroflora Pots Garden &amp; Outdoors</h3>
+            </div>
+        </div>
+    </div>
+  
+    <div class="col-lg-4">
+        <div class="card">
+            <img class="card-img-top img-responsive" src="assets/images/big/img2.jpg" alt="Card">
+            <div class="card-body">
+                <ul class="list-inline d-flex font-14">
+                    <li class="p-l-0 mr-3">20 May 2016</li>
+                    <li>
+                        <a href="javascript:void(0)" class="link">3 Comment</a>
+                    </li>
+                </ul>
+                <h3 class="font-normal">Featured Hydroflora Pots Garden &amp; Outdoors</h3>
+            </div>
+        </div>
+    </div>
+   
+    <div class="col-lg-4">
+        <div class="card">
+            <img class="card-img-top img-responsive" src="assets/images/big/img4.jpg" alt="Card">
+            <div class="card-body">
+                <ul class="list-inline d-flex font-14">
+                    <li class="p-l-0  mr-3">20 May 2016</li>
+                    <li>
+                        <a href="javascript:void(0)" class="link">3 Comment</a>
+                    </li>
+                </ul>
+                <h3 class="font-normal">Featured Hydroflora Pots Garden &amp; Outdoors</h3>
+            </div>
+        </div>
+    </div>
+   
+</div> -->

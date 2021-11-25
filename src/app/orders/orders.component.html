@@ -1,0 +1,79 @@
+<section class="content-header"></section>
+<div class="row datatable-content-class custom-tables">
+
+    <div class="col-xl-12">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Orders List</h3>
+                </div>
+                <div class="card-body">
+
+                    <div class="search-div">
+
+                        <select class="rows-records" (change)="Rows($event.target.value)">
+                            <option selected value="100">100</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                            <option value="10000">10000</option>
+                        </select>
+
+                        <input class="search-api" type="text" placeholder="Search"
+                            (input)="SearchSP($event.target.value)">
+
+                    </div>
+
+
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">Sr. No</th>
+                                <th style="width: 60px;">Order Id</th>
+                                <th>Service Name</th>
+                                <th>Customer</th>
+                                <th>Service Provider</th>
+
+                                <th>City</th>
+                                <th>State</th>
+
+                                <th>Status</th>
+                                <th>Provider Id</th>
+                                <th>Paid</th>
+                                <th>Create Date</th>
+                                <th>Update Date</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="OrderList.length==0">
+                            <tr>
+                                <td class="text-center font-italic" colspan="12">Fetching records, please wait</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="OrderList.length!=0">
+                            <tr *ngFor="
+									let person of OrderList;
+									let i = index
+								">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ person.orderId}} </td>
+                                <td>{{ person.sName}} </td>
+                                <td style="font-size: 0.7rem; text-transform: capitalize;"><b>{{ person.cName }}</b>
+                                </td>
+                                <td>{{ person.sName}} </td>
+                                <td>{{ person.city}} </td>
+                                <td>{{ person.state}} </td>
+                                <td>{{ person.status }}</td>
+                                <td>{{ person.provider_id }}</td>
+                                <td *ngIf="person.is_paid == 0"> <i class="mdi mdi-close icon-status text-warning"></i>
+                                </td>
+                                <td *ngIf="person.is_paid == 1"> <i class="mdi mdi-check icon-status text-success"></i>
+                                </td>
+                                <td>{{ person.created_at }}</td>
+                                <td>{{ person.updated_at }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

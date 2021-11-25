@@ -1,0 +1,20 @@
+// Theme colors
+#main-wrapper{
+    &[data-layout="vertical"]{
+        /*This is for the logo bg*/
+        .topbar .top-navbar .navbar-header{
+            &[data-logobg="skin6"]{
+                background: $skin6;
+            }
+        }
+        .topbar .navbar-collapse, .topbar{
+            background: linear-gradient(to right, #2a0f2e 0%, #762881 100%);
+        }
+        /*This is for the sidebar bg*/
+        .left-sidebar{
+            &[data-sidebarbg="skin6"], &[data-sidebarbg="skin6"] ul{
+                background: $skin6;
+            }
+        }
+    }
+}

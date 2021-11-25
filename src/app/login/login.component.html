@@ -1,0 +1,34 @@
+<img class="wave" src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/wave.png">
+<div class="container">
+    <div class="img">
+        <img src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/bg.svg">
+    </div>
+    <div class="login-content">
+        <form #loginForm="ngForm" (ngSubmit)="LoginNow(loginForm.value)">
+            <img src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg">
+            <br>
+            <h3 class="title">Welcome to NakliBeta ERP</h3>
+            <br>
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="div">
+                    <!-- <h5>Username</h5> -->
+                    <input placeholder="Username" type="text" class="input" name="username" ngModel required>
+                </div>
+            </div>
+            <div class="input-div pass">
+                <div class="i">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="div">
+                    <!-- <h5>Password</h5> -->
+                    <input placeholder="Password" type="password" class="input" name="password" ngModel required>
+                </div>
+            </div>
+            <!-- <a href="#">Forgot Password?</a> -->
+            <input type="submit" class="btn" value="Login" [disabled]="!loginForm.valid">
+        </form>
+    </div>
+</div>
