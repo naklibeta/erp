@@ -56,7 +56,7 @@ h3.card-title {
 }
 
 .search-div {
-    margin-bottom: 55px;
+    margin-bottom: 20px;
 }
 
 .rows-records {
@@ -96,4 +96,62 @@ h3.card-title {
 
 .datatable-content-class {
     margin-top: 2rem;
+}
+
+.edit-icon {
+    font-size: 18px;
+    color: #7460ee !important;
+}
+
+
+
+.button {
+    position: relative;
+
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.button__text {
+    transition: all 0.2s;
+}
+
+.button--loading .button__text {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.button--loading::after {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 4px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: button-loading-spinner 0.7s ease infinite;
+}
+
+@keyframes button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+
+button {
+    border-radius: 20px !important;
+    padding-left: 10px;
+    padding-right: 10px;
 }

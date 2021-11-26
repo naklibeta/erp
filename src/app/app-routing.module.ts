@@ -9,6 +9,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { LoginComponent } from './login/login.component';
 import { ServiceProviderAccountComponent } from './service-provider-account/service-provider-account.component';
+import { ExpenseComponent } from './expense/expense.component';
 
 
 
@@ -49,6 +50,10 @@ export const Approutes: Routes = [
       {
         path: 'sp-accounts',
         component: ServiceProviderAccountComponent
+      },
+      {
+        path: 'expense',
+        component: ExpenseComponent
       }
     ]
   },

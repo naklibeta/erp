@@ -1,0 +1,255 @@
+<section class="content-header"></section>
+<div class="row datatable-content-class custom-tables">
+
+    <div class="col-xl-12">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6 col-xl-6">
+                            <h3 class="card-title">Expenses</h3>
+                        </div>
+                        <div class="col-md-6 col-xl-6 text-right">
+                            <a> <button class="btn btn-success small-btn" type="button"
+                                    (click)="exportReportToExcel()">Export
+                                    <i class="mdi mdi-note-plus"></i></button> </a>
+                            &nbsp; &nbsp;
+                            <a> <button class="btn btn-primary small-btn" type="button" (click)="open3(content3)">Add
+                                    <i class="mdi mdi-note-plus"></i></button> </a>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="card-body">
+
+                    <div class="search-div">
+
+                        <select class="rows-records" (change)="Rows($event.target.value)">
+                            <option selected value="100">100</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                            <option value="10000">10000</option>
+                        </select>
+
+                        <input class="search-api" type="text" placeholder="Search"
+                            (input)="SearchSP($event.target.value)">
+
+                    </div>
+
+
+
+
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">Sr. No</th>
+                                <th>Payee</th>
+                                <th>Payment Mode</th>
+                                <th>Pay Amount</th>
+                                <th>Pay for Date</th>
+                                <th>Type</th>
+                                <th>Account</th>
+                                <th>Pay Subject</th>
+                                <th>Pay Note</th>
+                                <th>Create Date</th>
+                                <th>Update Date</th>
+
+
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="ExpenseList.length==0">
+                            <tr>
+                                <td class="text-center font-italic" colspan="15">Fetching records, please wait</td>
+                            </tr>
+                        </tbody>
+
+                        <tbody *ngIf="ExpenseList.length!=0">
+                            <tr *ngFor="let person of ExpenseList;let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ person.person_name}} </td>
+                                <td>{{ person.pay_mode}} </td>
+                                <td>{{ person.amount}} </td>
+                                <td>{{ person.pay_fordate}} </td>
+                                <td>{{ person.type}} </td>
+                                <td>{{ person.account_ref}} </td>
+                                <td>{{ person.pay_subject}} </td>
+                                <td>{{ person.pay_note}} </td>
+                                <td>{{ person.created_at}} </td>
+                                <td>{{ person.updated_at}} </td>
+                                <td>
+                                    <a (click)="open4(content4, person)" class="edit-icon">
+                                        <i class="mdi mdi-pencil-box-outline"> </i>
+                                    </a>
+                                    <!-- <button *ngIf="person.rzp_status != 'refunded' " type="button"
+                                        class="btn btn-primary btn-xs" (click)="Refund(person.rzp_orderId, 
+                                        person.total_amount
+                                        )">
+                                        Refund
+                                    </button> -->
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #content3 let-modal id="paymentModal">
+    <form #addForm="ngForm" (ngSubmit)="SaveExpenseRecords(addForm.value)">
+        <div class="modal-header">
+            <h4 class="modal-title">Add Expense Record</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Payee Name</label>
+                    <input type="text" name="person_name" class="form-control" ngModel placeholder="Enter Payee Name"
+                        required>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Amount</label>
+                    <input type="text" name="amount" class="form-control" ngModel placeholder="Enter Amount" required>
+                </div>
+
+
+                <!-- <input type="hidden" name="type" value="Debit" class="form-control" ngModel required> -->
+
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Payment Mode</label>
+                    <select name="pay_mode" class="form-control" ngModel required placeholder="Select Payment Method">
+                        <option selected disabled>Select Payment Mode</option>
+                        <option value="UPI">UPI</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Account Number</label>
+                    <input type="number" name="account_ref" class="form-control" ngModel
+                        placeholder="Enter Payee Account Number" required>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Payment Date</label>
+                    <input type="datetime-local" name="pay_fordate" class="form-control" ngModel
+                        placeholder="Enter Payment Date" required>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Payment Subject</label>
+                    <input type="text" name="pay_subject" class="form-control" ngModel
+                        placeholder="Enter Payment Subject" required>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Payment Notes</label>
+                    <textarea type="text" name="pay_note" class="form-control" ngModel
+                        placeholder="Enter Payment Subject" required> </textarea>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-success" [disabled]="!addForm.valid">Save</button>
+            <button type="button" id="close_add" class="btn btn-inverse"
+                (click)="modal.dismiss('Cross click')">Close</button>
+        </div>
+    </form>
+</ng-template>
+
+
+
+<ng-template #content4 let-modal id="expenseEditModal">
+    <form #editForm="ngForm" (ngSubmit)="EditExpenseRecords(editForm.value)">
+        <div class="modal-header">
+            <h4 class="modal-title">Edit Expense Record</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Payee Name</label>
+                    <input type="text" name="person_name" class="form-control"
+                        [(ngModel)]="ExpenseDetailsEdit.person_name" placeholder="Enter Payee Name" required>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Amount</label>
+                    <input type="text" name="amount" class="form-control" [(ngModel)]="ExpenseDetailsEdit.amount"
+                        placeholder="Enter Amount" required>
+                </div>
+
+
+                <!-- <input type="hidden" name="type" value="Debit" class="form-control" ngModel required> -->
+
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Payment Mode</label>
+                    <select name="pay_mode" class="form-control" [(ngModel)]="ExpenseDetailsEdit.pay_mode" required
+                        placeholder="Select Payment Method">
+                        <option selected disabled>Select Payment Mode</option>
+                        <option value="UPI">UPI</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="Cash">Cash</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Account Number</label>
+                    <input type="number" name="account_ref" class="form-control"
+                        [(ngModel)]="ExpenseDetailsEdit.account_ref" placeholder="Enter Payee Account Number" required>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Payment Date</label>
+                    <input type="datetime-local" name="pay_fordate" class="form-control"
+                        [(ngModel)]="ExpenseDetailsEdit.pay_fordate" placeholder="Enter Payment Date" required>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Payment Subject</label>
+                    <input type="text" name="pay_subject" class="form-control"
+                        [(ngModel)]="ExpenseDetailsEdit.pay_subject" placeholder="Enter Payment Subject" required>
+                </div>
+
+                <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
+                    <label>Payment Notes</label>
+                    <textarea type="text" name="pay_note" class="form-control" [(ngModel)]="ExpenseDetailsEdit.pay_note"
+                        placeholder="Enter Payment Subject" required> </textarea>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <button type="submit" id="edit-expense" class="btn btn-success button " [disabled]="!editForm.valid">
+
+                Update</button>
+            <button type="button" id="close_edit" class="btn btn-inverse"
+                (click)="modal.dismiss('Cross click')">Close</button>
+        </div>
+    </form>
+</ng-template>

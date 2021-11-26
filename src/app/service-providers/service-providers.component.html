@@ -43,7 +43,7 @@
                 <th>City</th>
                 <th>Phone</th>
                 <th>Email</th>
-                <th>Status</th>
+                <!-- <th>Status</th> -->
               </tr>
             </thead>
             <tbody *ngIf="providerList.length==0">
@@ -57,8 +57,11 @@
 									let i = index
 								">
                 <td>{{ i + 1 }}</td>
-                <td>{{ person.providerId}} </td>
-                <td (click)="SP_Orders(person.providerId)" style="font-size: 0.7rem; text-transform: capitalize;">
+                <td class="text-uppercase">{{ person.providerId}} </td>
+                <td (click)="SP_Orders(person.providerId)" style="
+                font-size: 0.7rem; text-transform: capitalize;cursor: pointer;text-decoration: underline;
+                font-style: italic;
+                ">
                   <b>{{ person.name }}</b>
                 </td>
                 <td>{{ person.state}} </td>
@@ -67,13 +70,13 @@
                 <td>{{ person.emailId }}</td>
 
 
-                <td *ngIf="person.status == 0 " class="text-danger">Blocked</td>
+                <!-- <td *ngIf="person.status == 0 " class="text-danger">Blocked</td>
                 <td *ngIf="person.status == 1 || person.status == 7" class="text-success">Active</td>
                 <td *ngIf="person.status == 2 " class="text-warning">Reg. in Progress</td>
                 <td *ngIf="person.status == 3 " class="text-warning">Profile Pending</td>
                 <td *ngIf="person.status == 4 " class="text-warning">KYC Pending</td>
                 <td *ngIf="person.status == 5 " class="text-warning">Reference</td>
-                <td *ngIf="person.status == 6 " class="text-warning">Training Pending</td>
+                <td *ngIf="person.status == 6 " class="text-warning">Training Pending</td> -->
 
               </tr>
             </tbody>

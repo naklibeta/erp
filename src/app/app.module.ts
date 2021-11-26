@@ -33,6 +33,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { LoginComponent } from './login/login.component';
 import { ServiceProviderAccountComponent } from './service-provider-account/service-provider-account.component';
+import { ExpenseComponent } from './expense/expense.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	suppressScrollX: true,
@@ -54,7 +55,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   OrdersComponent,
   PaymentsComponent,
   LoginComponent,
-  ServiceProviderAccountComponent
+  ServiceProviderAccountComponent,
+  ExpenseComponent
 	],
 	imports: [
 		CommonModule,

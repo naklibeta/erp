@@ -3,12 +3,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
   constructor(public http: HttpClient) {
+
+
+
+
   }
 
   public Common_Test(postFix: any, data: any): Observable<any> {
@@ -35,12 +41,20 @@ export class ApiService {
     setTimeout(() => {
       msg.style.display = "none";
     }, 3000);
-
-
-
-
-
   }
+
+  public ShowButtonLoader(classC: any, type: any) {
+    var element: any = document.getElementById(classC);
+
+    if (type == 1) {
+      element.classList.add("button--loading");
+    } else {
+      element.classList.remove("button--loading");
+    }
+  }
+
+
+
 
 
 }

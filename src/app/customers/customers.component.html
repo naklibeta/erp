@@ -33,7 +33,7 @@
                                 <th>Mobile</th>
                                 <th>Status</th>
                                 <th>Online</th>
-                                <th>Action</th>
+                                <!-- <th>Action</th> -->
 
 
 
@@ -46,7 +46,7 @@
                         <tbody *ngIf="CustomerList.length!=0">
                             <tr *ngFor="let cust of CustomerList; let i = index">
                                 <td>{{ i + 1 }}</td>
-                                <td><strong>{{ cust.name }}</strong></td>
+                                <td class="text-capitalize"><strong>{{ cust.name }}</strong></td>
                                 <td>{{ cust.email }}</td>
                                 <td>{{ cust.mobile }}</td>
                                 <td>
@@ -64,9 +64,9 @@
                                     }}
                                 </td>
 
-                                <td>
+                                <!-- <td>
 
-                                </td>
+                                </td> -->
                             </tr>
                         </tbody>
                     </table>
