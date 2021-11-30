@@ -1,46 +1,13 @@
 <section class="content-header"></section>
 <div class="row datatable-content-class custom-tables">
 
-
-    <div class="col-xl-12">
-        <div class="container-fluid">
-            <div class="card">
-                <div class="card-header">
-
-
-                </div>
-                <div class="card-body">
-
-
-                    <div class="row">
-                        <div class="col-sm-4 col-xl-4 ">
-                            <p> <i> <b>No of Orders</b></i> : {{PaymentList.length}} </p>
-                        </div>
-                        <div class="col-sm-4 col-xl-4 ">
-                            <p><b><i> Total Payment Pending of</i> : {{TotalPaymentClear}}/- </b></p>
-                        </div>
-                        <div class="col-sm-4 col-xl-4 ">
-                            <p><b><i> No. Service Providers Payments</i> : {{ServiceProviders}} </b></p>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
     <div class="col-xl-12">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6 col-xl-6">
-                            <h3 class="card-title">Payments</h3>
+                            <h3 class="card-title">Transactions</h3>
                         </div>
                         <div class="col-md-6 col-xl-6 text-right">
                             <a> <button class="btn btn-success small-btn" type="button"
@@ -56,27 +23,17 @@
                 </div>
                 <div class="card-body">
 
-                    <div class="search-div row">
+                    <div class="search-div">
 
-                        <div class="col-xl-3 col-sm-3">
-                            <select class="rows-records" (change)="Rows($event.target.value)">
-                                <option selected value="100">100</option>
-                                <option value="500">500</option>
-                                <option value="1000">1000</option>
-                                <option value="10000">10000</option>
-                            </select>
-                        </div>
+                        <select class="rows-records" (change)="Rows($event.target.value)">
+                            <option selected value="100">100</option>
+                            <option value="500">500</option>
+                            <option value="1000">1000</option>
+                            <option value="10000">10000</option>
+                        </select>
 
-                        <div class="col-xl-9 col-sm-9 text-right">
-                            <input type="date" class="custom-input" [(ngModel)]="fromDate">
-                            &nbsp; &nbsp;
-                            <input type="date" class="custom-input" [(ngModel)]="toDate">
-                            &nbsp; &nbsp;
-                            <input class="search-api-n" type="text" placeholder="Search"
-                                (input)="SearchSP($event.target.value)">
-                        </div>
-
-
+                        <input class="search-api" type="text" placeholder="Search"
+                            (input)="SearchSP($event.target.value)">
 
                     </div>
 
@@ -86,34 +43,20 @@
                             <tr>
                                 <th style="width: 50px;">Sr. No</th>
                                 <th style="width: 60px;">Order Id</th>
-                                <th style="width: 60px;">SP Name</th>
-                                <th style="width: 60px;">Cust. Name</th>
-
-                                <!-- <th>RZP Order Id</th> -->
+                                <th>RZP Order Id</th>
                                 <th>RZP Payment Id</th>
 
-                                <!-- <th>RZP Payment Method</th> -->
+                                <th>RZP Payment Method</th>
                                 <th>CSGT%</th>
                                 <th>SGST%</th>
                                 <th>IGST%</th>
                                 <th>+ Tax</th>
                                 <th>Total</th>
                                 <th>Company Commission</th>
-                                <th><i class="mdi mdi-arrow-up-bold"
-                                        (click)="customSorting('up', 'provider_commission')"> </i>
-                                    <i class="mdi mdi-arrow-down-bold"
-                                        (click)="customSorting('down', 'provider_commission') "> </i>Provider Payment
-                                </th>
-                                <th>SP. Paid</th>
-                                <!-- <th>Status</th> -->
+                                <th>Provider Payment</th>
+                                <th>Status</th>
                                 <th>RZP Status</th>
-                                <th>
-                                    <i class="mdi mdi-arrow-up-bold" (click)="customSorting('up', 'rzp_date')"> </i>
-                                    <i class="mdi mdi-arrow-down-bold" (click)="customSorting('down', 'rzp_date') ">
-                                    </i>
-
-                                    RZP Payment Date
-                                </th>
+                                <th>RZP Payment Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -126,13 +69,11 @@
                             <tr *ngFor="let person of PaymentList;let i = index">
                                 <td>{{ i + 1 }}</td>
                                 <td (click)="open2(content2, person)"><strong>{{ person.job_orderId}}</strong></td>
-                                <td>{{ person.sPName}} </td>
-                                <td>{{ person.cName}} </td>
 
-                                <!-- <td>{{ person.rzp_orderId}} </td> -->
+                                <td>{{ person.rzp_orderId}} </td>
                                 <td>{{ person.rzp_paymentId}} </td>
 
-                                <!-- <td>{{ person.rzp_method }}</td> -->
+                                <td>{{ person.rzp_method }}</td>
 
                                 <td>{{ person.tax_percentage }}</td>
                                 <td>{{ person.tax_percentage2 }}</td>
@@ -141,12 +82,7 @@
                                 <td><strong>₹{{ person.total_amount }}</strong></td>
                                 <td>₹{{ person.company_commission }}</td>
                                 <td>₹{{ person.provider_commission }}</td>
-                                <td *ngIf="person.sp_paid==1"> <i class="mdi mdi-account-check text-success md-font">
-                                    </i> </td>
-                                <td *ngIf="person.sp_paid==0"> <i class="mdi mdi-close-box-outline text-danger md-font">
-                                    </i>
-                                </td>
-                                <!-- <td>{{ person.status}} </td> -->
+                                <td>{{ person.status}} </td>
                                 <td style="text-transform: uppercase;">{{ person.rzp_status}} </td>
                                 <td>{{ person.rzp_date }}</td>
                                 <td>

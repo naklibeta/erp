@@ -55,6 +55,13 @@ h3.card-title {
     font-size: 12px;
 }
 
+.search-api-n {
+    border-radius: 20px;
+    padding: 1px 10px;
+    border-color: #c3c3c3;
+    font-size: 12px;
+}
+
 .search-div {
     margin-bottom: 20px;
 }
@@ -154,4 +161,40 @@ button {
     border-radius: 20px !important;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.small-font {
+    font-size: 11px;
+}
+
+.md-font {
+    font-size: 18px;
+}
+
+.custom-input {
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 2px 5px;
+    border: 1px solid #767676;
+}
+
+th i {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    color: #9d9d9d;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+th i.mdi-arrow-up-bold {
+    top: 20px;
+}
+
+th i.mdi-arrow-down-bold {
+    top: 50px;
+}
+
+.table th {
+    position: relative;
 }

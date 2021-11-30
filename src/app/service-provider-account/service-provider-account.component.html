@@ -25,15 +25,11 @@
                             <input class="form-control" type="date" name="toDat" [(ngModel)]="toDate">
                         </div>
 
-
-
                         <div class="col-xl-6 col-md-6">
                             <br>
                             <button type="button" class="btn btn-primary small-btn" (click)="PaySP()">Clear
                                 Payment</button>
                         </div>
-
-
 
                     </div>
                 </div>
@@ -81,6 +77,14 @@
                                 [value]="providerAccount.ifsc">
                         </div>
 
+                        <div *ngIf="bank_detail_error" class="col-xl-12 col-md-12">
+                            <p class="text-danger small-font"> <i> Bank details not found, unable to settle online
+                                    transactions </i>
+                            </p>
+                        </div>
+
+
+
                     </div>
 
                 </div>
@@ -112,6 +116,14 @@
                                 <th>Create Date</th>
                             </tr>
                         </thead>
+                        <tbody *ngIf="OrderList.length==0">
+                            <tr *ngIf="!NoRecords">
+                                <td class="text-center font-italic" colspan="11"> Fetching records, please wait.. </td>
+                            </tr>
+                            <tr *ngIf="NoRecords">
+                                <td class="text-center font-italic" colspan="11"> No payment records found </td>
+                            </tr>
+                        </tbody>
                         <tbody *ngIf="OrderList.length!=0">
                             <tr *ngFor="
                                 let person of OrderList;

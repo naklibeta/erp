@@ -8,12 +8,11 @@ declare var TableToExcel: any;
 declare var $: any;
 
 @Component({
-  selector: 'app-payments',
-  templateUrl: './payments.component.html',
-  styleUrls: ['./payments.component.css']
+  selector: 'app-recent-transactions',
+  templateUrl: './recent-transactions.component.html',
+  styleUrls: ['./recent-transactions.component.css']
 })
-export class PaymentsComponent implements OnInit {
-
+export class RecentTransactionsComponent implements OnInit {
   isLoading: boolean = false;
   //private sub = new SubSink();
 
@@ -28,10 +27,6 @@ export class PaymentsComponent implements OnInit {
   PaymentDetails: any = {};
   objectKeys = Object.keys;
   PaymentDetailsEdit: any = {};
-  fromDate: any;
-  toDate: any;
-  TotalPaymentClear: any = 0;
-  ServiceProviders: any = 0;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -40,8 +35,7 @@ export class PaymentsComponent implements OnInit {
     private modalService: NgbModal,
     private componentFactoryResolver: ComponentFactoryResolver
   ) {
-
-    this.setWeekDates();
+    // this.getPaymentsList();
   }
 
   ngOnInit(): void {
@@ -53,41 +47,16 @@ export class PaymentsComponent implements OnInit {
     // this.dtTrigger.next();
   }
 
-  setWeekDates() {
-    var curr = new Date; // get current date
-    var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-    //var last = first + 6; // last day is the first day + 6
-
-    this.fromDate = new Date(curr.setDate(first)).toISOString().slice(0, 10);
-    this.toDate = new Date().toISOString().slice(0, 10);
-  }
-
   getPaymentsList(limit: any, offset: any) {
     this.PaymentList = [];
     this.apiService.Common_POST('/accounts/getPaymentRecords', { limit: limit, offset: offset }).subscribe((results) => {
       if (results.statusCode == 200) {
         this.PaymentListOrg = this.PaymentList = results.data;
-        this.CalculateTotal();
       } else {
         this.PaymentList = [];
       }
       this.changeDetector.markForCheck();
     });
-  }
-
-  CalculateTotal() {
-    this.TotalPaymentClear = 0;
-    this.ServiceProviders = 0;
-    let AllSP: any = [];
-    this.PaymentList.forEach((element) => {
-      this.TotalPaymentClear = this.TotalPaymentClear + element.provider_commission;
-      AllSP.push(element.sPName);
-    });
-
-    let s = new Set(AllSP);
-    let it = s.values();
-    AllSP = Array.from(it);
-    this.ServiceProviders = AllSP.length;
   }
 
   SearchPaymentsList(limit: any, offset: any) {
@@ -237,24 +206,6 @@ export class PaymentsComponent implements OnInit {
       sheet: {
         name: 'Sheet 1' // sheetName
       }
-    });
-  }
-
-  customSorting(type: any, keyFor: any) {
-
-    this.PaymentList.sort(function (a, b) {
-      var keyA = a[keyFor],
-        keyB = b[keyFor];
-      // Compare the 2 dates
-      if (type == 'up') {
-        if (keyA < keyB) return -1;
-        if (keyA > keyB) return 1;
-      } else {
-        if (keyA > keyB) return -1;
-        if (keyA < keyB) return 1;
-      }
-
-      return 0;
     });
   }
 

@@ -27,6 +27,8 @@ export class ServiceProviderAccountComponent implements OnInit {
   public providerAccount: any = {};
   public TotalPay: any = 0;
   public OrderClearance: any = [];
+  public NoRecords: boolean = false;
+  public bank_detail_error: boolean = false;
   // StartDate:any = '';
   // EndDate:any = '';
 
@@ -40,6 +42,14 @@ export class ServiceProviderAccountComponent implements OnInit {
 
 
     this.providerId = localStorage.getItem('selectedProviderId');
+
+    this.providerAccount = {
+      ac_name: "",
+      ac_number: "",
+      bank: "",
+      branch: "",
+      ifsc: ""
+    }
 
 
   }
@@ -81,8 +91,10 @@ export class ServiceProviderAccountComponent implements OnInit {
         //-------------------------------------------------------------------------------------------
       } else {
         this.OrderList = [];
+        this.NoRecords = true;
       }
-
+    }, err => {
+      this.NoRecords = true;
     });
   }
 
@@ -110,6 +122,15 @@ export class ServiceProviderAccountComponent implements OnInit {
     this.apiService.Common_POST('/accounts/providerAccountDetails', { providerId: this.providerId }).subscribe((results) => {
       if (results.statusCode == 200) {
         this.providerAccount = results.data;
+
+        if (this.providerAccount.ac_name && this.providerAccount.ac_number && this.providerAccount.bank &&
+          this.providerAccount.branch) {
+
+        } else {
+          this.bank_detail_error = true;
+        }
+
+
       } else {
       }
     });
