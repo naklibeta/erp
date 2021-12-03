@@ -63,25 +63,19 @@ export class ServiceProvidersComponent implements OnInit {
 
 
   SearchSP(SearchKey: any) {
-
-
     if (SearchKey.length == 0) {
       this.providerList = this.providerListOrg
       return;
     }
-
     if (SearchKey.length <= 2) {
       return;
     }
-
     this.apiService.Common_POST('/accounts/searchProvider', { searchKey: SearchKey }).subscribe((results) => {
       if (results.statusCode == 200) {
         this.providerList = results.data;
       } else {
       }
     });
-
-
   }
 
 

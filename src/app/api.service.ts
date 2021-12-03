@@ -54,6 +54,17 @@ export class ApiService {
   }
 
 
+  FormatDateMMDD(date: any) {
+    debugger
+    let dateParsed = new Date(date);
+    let year = dateParsed.getFullYear();
+    let month = (1 + dateParsed.getMonth()).toString().padStart(2, '0');
+    let day = dateParsed.getDate().toString().padStart(2, '0');
+
+    return month + '/' + day + '/' + year;
+  }
+
+
 
 
 

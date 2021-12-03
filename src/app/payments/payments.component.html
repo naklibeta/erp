@@ -1,17 +1,12 @@
 <section class="content-header"></section>
 <div class="row datatable-content-class custom-tables">
 
-
     <div class="col-xl-12">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-
-
                 </div>
                 <div class="card-body">
-
-
                     <div class="row">
                         <div class="col-sm-4 col-xl-4 ">
                             <p> <i> <b>No of Orders</b></i> : {{PaymentList.length}} </p>
@@ -23,16 +18,10 @@
                             <p><b><i> No. Service Providers Payments</i> : {{ServiceProviders}} </b></p>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
 
     <div class="col-xl-12">
         <div class="container-fluid">
@@ -68,9 +57,26 @@
                         </div>
 
                         <div class="col-xl-9 col-sm-9 text-right">
+
+                            <div style="position: relative;">
+
+                                <div class="provider-drop" *ngIf="ShowListing">
+                                    <p (click)="SelectedProvider(provider.name, provider.id)"
+                                        *ngFor="let provider of providerList"> {{provider.name}}</p>
+
+                                    <p style="font-size: 10px;" *ngIf="providerList.length==0"> Provider not found using
+                                        this name </p>
+                                </div>
+
+                            </div>
+
+                            <input placeholder="Provider Name" type="text" class="custom-input"
+                                [(ngModel)]="ProviderName" (input)="SearchSPName($event.target.value)">
+                            &nbsp; &nbsp;
+
                             <input type="date" class="custom-input" [(ngModel)]="fromDate">
                             &nbsp; &nbsp;
-                            <input type="date" class="custom-input" [(ngModel)]="toDate">
+                            <input (input)="DateChange()" type="date" class="custom-input" [(ngModel)]="toDate">
                             &nbsp; &nbsp;
                             <input class="search-api-n" type="text" placeholder="Search"
                                 (input)="SearchSP($event.target.value)">
@@ -118,8 +124,11 @@
                             </tr>
                         </thead>
                         <tbody *ngIf="PaymentList.length==0">
-                            <tr>
-                                <td class="text-center font-italic" colspan="15">Fetching records, please wait</td>
+                            <tr *ngIf="!NoRecords">
+                                <td class="text-center font-italic" colspan="16">Fetching records, please wait</td>
+                            </tr>
+                            <tr *ngIf="NoRecords">
+                                <td class="text-center font-italic" colspan="16"> No payment records found </td>
                             </tr>
                         </tbody>
                         <tbody *ngIf="PaymentList.length!=0">

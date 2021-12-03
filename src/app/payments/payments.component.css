@@ -1,0 +1,17 @@
+.provider-drop {
+    width: 200px;
+    border: 1px solid #e5e5e5;
+    padding: 5px;
+    text-align: right;
+    background: #ffffff;
+    position: absolute;
+    top: 30px;
+    text-align: left;
+    left: 31px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.provider-drop p {
+    border-bottom: 1px solid #e1e1e1;
+}

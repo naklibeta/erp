@@ -32,6 +32,10 @@ export class PaymentsComponent implements OnInit {
   toDate: any;
   TotalPaymentClear: any = 0;
   ServiceProviders: any = 0;
+  NoRecords: boolean = false;
+  ProviderName: string = '';
+  providerList: any = [];
+  ShowListing: boolean = false;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -62,14 +66,22 @@ export class PaymentsComponent implements OnInit {
     this.toDate = new Date().toISOString().slice(0, 10);
   }
 
+  DateChange() {
+    this.getPaymentsList(100000, 1);
+  }
+
   getPaymentsList(limit: any, offset: any) {
+    let sendfrom = this.apiService.FormatDateMMDD(this.fromDate);
+    let sendto = this.apiService.FormatDateMMDD(this.toDate);
     this.PaymentList = [];
-    this.apiService.Common_POST('/accounts/getPaymentRecords', { limit: limit, offset: offset }).subscribe((results) => {
+    this.apiService.Common_POST('/accounts/getPaymentByDate', { limit: limit, offset: offset, from: sendfrom, to: sendto }).subscribe((results) => {
       if (results.statusCode == 200) {
         this.PaymentListOrg = this.PaymentList = results.data;
+        if (this.PaymentList.length == 0) this.NoRecords = true;
         this.CalculateTotal();
       } else {
         this.PaymentList = [];
+        if (this.PaymentList.length == 0) this.NoRecords = true;
       }
       this.changeDetector.markForCheck();
     });
@@ -256,6 +268,49 @@ export class PaymentsComponent implements OnInit {
 
       return 0;
     });
+  }
+
+  SearchSPName(SearchKey: any) {
+
+    if (SearchKey.length <= 2) {
+      return;
+    }
+    this.apiService.Common_POST('/accounts/searchProvider', { searchKey: SearchKey }).subscribe((results) => {
+      if (results.statusCode == 200) {
+        this.ShowListing = true;
+        this.providerList = results.data;
+      } else {
+      }
+    });
+  }
+
+
+  SelectedProvider(name: any, id: any) {
+
+    if (name.length == 0) {
+      this.ShowListing = false;
+    }
+    this.ShowListing = false;
+    this.ProviderName = name;
+
+    let sendfrom = this.apiService.FormatDateMMDD(this.fromDate);
+    let sendto = this.apiService.FormatDateMMDD(this.toDate);
+
+    this.PaymentList = [];
+
+    this.apiService.Common_POST('/accounts/getProviderPayment', { from: sendfrom, to: sendto, providerId: id }).subscribe((results) => {
+      if (results.statusCode == 200) {
+        this.PaymentListOrg = this.PaymentList = results.data;
+        if (this.PaymentList.length == 0) this.NoRecords = true;
+        this.CalculateTotal();
+      } else {
+        this.PaymentList = [];
+        if (this.PaymentList.length == 0) this.NoRecords = true;
+      }
+      this.changeDetector.markForCheck();
+    });
+
+
   }
 
 }
