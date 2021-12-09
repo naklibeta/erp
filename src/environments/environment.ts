@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   localApiUrl: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/assets/apis',
   //apiUrl: 'http://localhost/naklibeta-api/public/api',
-  //apiUrl: 'https://naklibeta.com/api/api',
+  //apiUrl: 'http://34.84.233.160/api/api',
   apiUrl: 'https://jobbanko.com/api/api',
   localImageUrl: location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + '/assets/img',
 };

@@ -67,7 +67,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   DateChange() {
-    this.getPaymentsList(100000, 1);
+    this.getPaymentsList(100000, 0);
   }
 
   getPaymentsList(limit: any, offset: any) {

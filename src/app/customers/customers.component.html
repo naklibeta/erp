@@ -31,9 +31,11 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Mobile</th>
+                                <th>Location</th>
+                                <th>City</th>
+                                <th>State</th>
                                 <th>Status</th>
-                                <th>Online</th>
-                                <!-- <th>Action</th> -->
+
 
 
 
@@ -47,22 +49,23 @@
                             <tr *ngFor="let cust of CustomerList; let i = index">
                                 <td>{{ i + 1 }}</td>
                                 <td class="text-capitalize"><strong>{{ cust.name }}</strong></td>
-                                <td>{{ cust.email }}</td>
+                                <td>{{ cust.emailId }}</td>
                                 <td>{{ cust.mobile }}</td>
-                                <td>
+                                <td style="    padding: 0; text-align: center;">
+                                    <a target="_blank" class="theme-color" style="font-size: 24px;"
+                                        href="https://www.google.com/maps/search/?api=1&query={{cust.latitude}},{{cust.langitude}}">
+                                        <i class="mdi mdi-google-maps "> </i> </a>
+                                </td>
+                                <td>{{ cust.city }}</td>
+                                <td>{{ cust.state }}</td>
+                                <td class="text-warning">
                                     {{
                                     cust.status == 1
                                     ? 'Active'
                                     : 'Profile Pending'
                                     }}
                                 </td>
-                                <td>
-                                    {{
-                                    cust.loginStatus == 1
-                                    ? 'Online'
-                                    : 'Offline'
-                                    }}
-                                </td>
+
 
                                 <!-- <td>
 

@@ -5,6 +5,7 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
+                    <h3 class="card-title">Payments</h3>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -29,7 +30,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6 col-xl-6">
-                            <h3 class="card-title">Payments</h3>
+
                         </div>
                         <div class="col-md-6 col-xl-6 text-right">
                             <a> <button class="btn btn-success small-btn" type="button"
@@ -74,7 +75,7 @@
                                 [(ngModel)]="ProviderName" (input)="SearchSPName($event.target.value)">
                             &nbsp; &nbsp;
 
-                            <input type="date" class="custom-input" [(ngModel)]="fromDate">
+                            <input (input)="DateChange()" type="date" class="custom-input" [(ngModel)]="fromDate">
                             &nbsp; &nbsp;
                             <input (input)="DateChange()" type="date" class="custom-input" [(ngModel)]="toDate">
                             &nbsp; &nbsp;

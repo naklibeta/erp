@@ -33,6 +33,10 @@
                                 <th>Customer</th>
                                 <th>Service Provider</th>
 
+                                <th>Total Amount</th>
+                                <th>Commission</th>
+                                <th>Provider Payment</th>
+
                                 <th>City</th>
                                 <th>State</th>
 
@@ -54,16 +58,31 @@
 									let i = index
 								">
                                 <td>{{ i + 1 }}</td>
-                                <td>{{ person.orderId}} </td>
+                                <td><b>{{ person.orderId}}</b></td>
                                 <td>{{ person.sName}} </td>
                                 <td style="font-size: 0.7rem; text-transform: capitalize;"><b>{{ person.cName }}</b>
                                 </td>
-                                <td>{{ person.sName}} </td>
+
+                                <td *ngIf="!person.providerName">NA </td>
+                                <td *ngIf="person.providerName">{{ person.providerName}} </td>
+
+
+                                <td *ngIf="person.total_amount"><strong>₹{{ person.total_amount }}</strong></td>
+                                <td *ngIf="!person.total_amount"><strong>NA</strong></td>
+
+                                <td *ngIf="person.company_commission">₹{{ person.company_commission }}</td>
+                                <td *ngIf="!person.company_commission">NA</td>
+
+                                <td *ngIf="person.provider_commission">₹{{ person.provider_commission }}</td>
+                                <td *ngIf="!person.provider_commission">NA</td>
+
+
+
                                 <td>{{ person.city}} </td>
                                 <td>{{ person.state}} </td>
                                 <td>{{ person.status }}</td>
                                 <td>{{ person.provider_id }}</td>
-                                <td *ngIf="person.is_paid == 0"> <i class="mdi mdi-close icon-status text-warning"></i>
+                                <td *ngIf="person.is_paid == 0"> <i class="mdi mdi-close icon-status text-danger"></i>
                                 </td>
                                 <td *ngIf="person.is_paid == 1"> <i class="mdi mdi-check icon-status text-success"></i>
                                 </td>

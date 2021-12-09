@@ -39,6 +39,7 @@
                 <th style="width: 50px;">Sr. No</th>
                 <th style="width: 60px;">System Id</th>
                 <th>Name</th>
+                <th>location</th>
                 <th>State</th>
                 <th>City</th>
                 <th>Phone</th>
@@ -65,6 +66,9 @@
                 ">
                   <b>{{ person.name }}</b>
                 </td>
+                <td> <a target="_blank" class="theme-color" style="font-size: 24px;"
+                    href="https://www.google.com/maps/search/?api=1&query={{person.latitude}},{{person.langitude}}">
+                    <i class="mdi mdi-google-maps "> </i> </a> </td>
                 <td>{{ person.state}} </td>
                 <td>{{ person.city}} </td>
                 <td>{{ person.mobile }}</td>

@@ -9,10 +9,15 @@ declare var $: any;
 export class NavigationComponent {
   @Output()
   toggleSidebar = new EventEmitter<void>();
+  public UserData: any;
 
   public showSearch = false;
 
-  constructor(public router: Router) { }
+  constructor(public router: Router) {
+    let getD: any = localStorage.getItem("adminUser");
+    let userD: any = JSON.parse(getD);
+    this.UserData = userD.data;
+  }
 
 
   logout() {

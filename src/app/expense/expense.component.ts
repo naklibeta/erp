@@ -82,7 +82,7 @@ export class ExpenseComponent implements OnInit {
       return;
     }
 
-    this.apiService.Common_POST('/accounts/getExpenseRecords', { searchKey: SearchKey }).subscribe((results) => {
+    this.apiService.Common_POST('/accounts/searchExpense', { searchKey: SearchKey }).subscribe((results) => {
       if (results.statusCode == 200) {
         this.ExpenseList = results.data;
       } else {

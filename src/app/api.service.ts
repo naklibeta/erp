@@ -11,10 +11,6 @@ import { environment } from '../environments/environment';
 export class ApiService {
 
   constructor(public http: HttpClient) {
-
-
-
-
   }
 
   public Common_Test(postFix: any, data: any): Observable<any> {
@@ -36,7 +32,6 @@ export class ApiService {
 
     let docSelect: any = document.getElementById("message_text");
     docSelect.innerHTML = message_text;
-
 
     setTimeout(() => {
       msg.style.display = "none";

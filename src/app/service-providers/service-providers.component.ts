@@ -38,7 +38,7 @@ export class ServiceProvidersComponent implements OnInit {
 
   ngOnInit(): void {
     // get datatable data
-    this.getProvidersList(100, 1);
+    this.getProvidersList(100, 0);
   }
 
   ngAfterViewInit(): void {
