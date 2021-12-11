@@ -1,16 +1,6 @@
 <section class="content-header"></section>
 <div class="row datatable-content-class custom-tables">
 
-
-
-
-
-
-
-
-
-
-
   <div class="col-xl-12">
     <div class="container-fluid">
       <div class="card">
@@ -20,18 +10,14 @@
         <div class="card-body">
 
           <div class="search-div">
-
             <select class="rows-records" (change)="Rows($event.target.value)">
               <option selected value="100">100</option>
               <option value="500">500</option>
               <option value="1000">1000</option>
               <option value="10000">10000</option>
             </select>
-
             <input class="search-api" type="text" placeholder="Search" (input)="SearchSP($event.target.value)">
-
           </div>
-
 
           <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
