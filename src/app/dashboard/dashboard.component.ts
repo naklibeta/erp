@@ -11,6 +11,11 @@ declare var require: any;
 export class DashboardComponent implements AfterViewInit {
   subtitle: string;
   public DashboardData: any;
+
+  public PaymentsList: any = [];
+  public MonthList: any = [];
+  public OrdersList: any = [];
+
   constructor(public api: ApiService) {
     this.subtitle = 'This is some text within a card block.';
 
@@ -21,15 +26,11 @@ export class DashboardComponent implements AfterViewInit {
 
   // lineChart
   public lineChartData: Array<object> = [
-    { data: [8, 13, 1, 13, 1], label: 'Product A' },
-    { data: [14, 1, 14, 1, 14], label: 'Product B' }
+  ];
+  public lineChartData2: Array<object> = [
   ];
   public lineChartLabels: Array<string> = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
+
   ];
   public lineChartOptions = {
     responsive: true,
@@ -145,6 +146,32 @@ export class DashboardComponent implements AfterViewInit {
     });
 
 
+    this.api.Common_GET('/accounts/paymentByMonth').subscribe((results) => {
+      if (results.statusCode == 200) {
+        let GraphData = results.data;
 
+
+
+        this.PaymentsList = GraphData.map(function (a: any) { return a.Amount; });
+        this.MonthList = GraphData.map(function (a: any) { return a.month; });
+        this.OrdersList = GraphData.map(function (a: any) { return a.payments; });
+        debugger
+        this.lineChartLabels = this.MonthList;
+
+
+        this.lineChartData = [{ data: this.PaymentsList, label: 'Revenue' }];
+        this.lineChartData2 = [{ data: this.OrdersList, label: 'Orders' }];
+
+
+
+        console.log(this.PaymentsList);
+
+
+      } else {
+      }
+    });
   }
+
+
+
 }

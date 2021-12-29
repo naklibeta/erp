@@ -135,7 +135,8 @@
 
                 <div class="order-search-list" *ngIf="SearchedOrder.length!=0">
                     <ul>
-                        <li (click)="SetOrderId(order.orderId)" *ngFor="let order of SearchedOrder"> {{order.orderId}},
+                        <li (click)="SetOrderId(order.orderId, 'insert')" *ngFor="let order of SearchedOrder">
+                            {{order.orderId}},
                             {{order.cName}},
                             {{apiService.FormatDateMMDD( order.date )}}</li>
                     </ul>
@@ -200,16 +201,19 @@
 
                 <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
                     <label>Order Id</label>
-                    <input type="text" name="order_id" class="form-control" [(ngModel)]="PaymentDetailsEdit.job_orderId"
-                        placeholder="Enter Order Id" required>
+                    <input type="text" (input)="fetchOrder($event.target.value)" name="order_id" class="form-control"
+                        [(ngModel)]="PaymentDetailsEdit.job_orderId" placeholder="Enter Order Id" required>
                 </div>
 
-                <div class="order-suggestions">
+                <div class="order-search-list" *ngIf="SearchedOrder.length!=0">
                     <ul>
-                        <li *ngFor="let order of SearchedOrder"> {{order.orderId}}, {{order.cName}},
+                        <li (click)="SetOrderId(order.orderId, 'update')" *ngFor="let order of SearchedOrder">
+                            {{order.orderId}},
+                            {{order.cName}},
                             {{apiService.FormatDateMMDD( order.date )}}</li>
                     </ul>
                 </div>
+
 
                 <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
                     <label>Order Amount</label>

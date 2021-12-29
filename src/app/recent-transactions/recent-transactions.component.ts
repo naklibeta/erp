@@ -229,9 +229,14 @@ export class RecentTransactionsComponent implements OnInit {
 
   }
 
-  SetOrderId(orderId: any) {
+  SetOrderId(orderId: any, type: any) {
 
-    this.OrderId = orderId;
+    if (type == 'insert') {
+      this.OrderId = orderId;
+    } else {
+      this.OrderId = this.PaymentDetailsEdit.job_orderId
+    }
+
     this.SearchedOrder = [];
 
   }

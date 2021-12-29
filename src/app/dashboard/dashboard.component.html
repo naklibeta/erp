@@ -1,14 +1,14 @@
 <div class="mt-10">
 
     <div class="row ">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Today Orders</h4>
                     <div class="text-right">
                         <h2 class="font-light m-b-0"><i class="ti-arrow-up text-success"></i>
-                            ₹{{DashboardData.today_revenue}}</h2>
-                        <span class="text-muted">Todays Income</span>
+                            {{DashboardData.today_orders}} | ₹{{DashboardData.today_revenue}}</h2>
+                        <span class="text-muted">Todays Order(s) / Income</span>
                     </div>
                     <!-- <span class="text-success">80%</span>
                 <div class="progress">
@@ -18,15 +18,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Weekly Orders</h4>
                     <div class="text-right">
                         <h2 class="font-light m-b-0"><i class="ti-arrow-up text-info"></i>
-                            ₹{{DashboardData.week_orders}}
+                            {{DashboardData.today_revenue}} | ₹{{DashboardData.week_orders}}
                         </h2>
-                        <span class="text-muted">Week Income</span>
+                        <span class="text-muted">Week Order(s) / Income</span>
                     </div>
                     <!-- <span class="text-info">30%</span>
                 <div class="progress">
@@ -36,24 +36,70 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Month Orders</h4>
+                    <div class="text-right">
+                        <h2 class="font-light m-b-0"><i class="ti-arrow-up text-info"></i>
+                            {{DashboardData.month_orders}} | ₹{{DashboardData.month_revenue}}
+                        </h2>
+                        <span class="text-muted">Month Order(s) / Income</span>
+                    </div>
+                    <!-- <span class="text-info">30%</span>
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 30%; height: 6px;"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div> -->
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="card">
                 <div class="card-body">
                     <div class="d-md-flex align-items-center">
-                        <h4 class="card-title">Revenue Statics</h4>
+                        <h4 class="card-title">Orders Statics</h4>
                         <div class="ml-auto">
-                            <ul class="list-inline">
+                            <!-- <ul class="list-inline">
                                 <li class="list-inline-item">
                                     <h6 class="text-muted"><i class="fa fa-circle m-r-5 text-info"></i>Sin(x)</h6>
                                 </li>
                                 <li class="list-inline-item">
                                     <h6 class="text-muted"><i class="fa fa-circle m-r-5 text-success"></i>Cos(x)</h6>
                                 </li>
-                            </ul>
+                            </ul> -->
+                        </div>
+                    </div>
+                    <div style="height:300px;" class="m-t-20">
+                        <canvas baseChart height="130" [datasets]="lineChartData2" [labels]="lineChartLabels"
+                            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                            [chartType]="lineChartType">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex align-items-center">
+                        <h4 class="card-title">Revenue Statics</h4>
+                        <div class="ml-auto">
+                            <!-- <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <h6 class="text-muted"><i class="fa fa-circle m-r-5 text-info"></i>Sin(x)</h6>
+                                </li>
+                                <li class="list-inline-item">
+                                    <h6 class="text-muted"><i class="fa fa-circle m-r-5 text-success"></i>Cos(x)</h6>
+                                </li>
+                            </ul> -->
                         </div>
                     </div>
                     <div style="height:300px;" class="m-t-20">
