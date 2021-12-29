@@ -10,10 +10,49 @@
     overflow-y: scroll;
 }
 
-
 .order-search-list ul li {
     border-bottom: 1px solid #d5d5d5;
     font-size: 14px;
     margin-bottom: 3px;
     padding-bottom: 3px;
+}
+
+.modal-heading {
+    margin: auto;
+}
+
+.cls-btn {
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.head-tag {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+.table-th {
+    font-size: 14px;
+    padding: 5px;
+    font-weight: normal;
+}
+
+.table-td {
+    font-size: 14px;
+    padding: 5px;
+}
+
+.col-th {
+    background: #fdfdfe;
+    border: 1px solid #dee2e6;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.col-td {
+    font-size: 14px;
+    border: 1px solid #dee2e6;
+    padding: 5px
 }
