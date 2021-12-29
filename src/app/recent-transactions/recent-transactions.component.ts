@@ -27,6 +27,8 @@ export class RecentTransactionsComponent implements OnInit {
   PaymentDetails: any = {};
   objectKeys = Object.keys;
   PaymentDetailsEdit: any = {};
+  SearchedOrder: any = [];
+  OrderId: any = '';
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -40,7 +42,7 @@ export class RecentTransactionsComponent implements OnInit {
 
   ngOnInit(): void {
     // get datatable data
-    this.getPaymentsList(100, 1);
+    this.getPaymentsList(100, 0);
   }
 
   ngAfterViewInit(): void {
@@ -207,6 +209,31 @@ export class RecentTransactionsComponent implements OnInit {
         name: 'Sheet 1' // sheetName
       }
     });
+  }
+
+  fetchOrder(SearchKey: any) {
+
+    if (SearchKey.length == 0 || SearchKey.length <= 2) {
+      this.SearchedOrder = [];
+      return;
+    }
+
+    this.apiService.Common_POST('/accounts/findOrders', { searchKey: SearchKey }).subscribe((results) => {
+      if (results.statusCode == 200) {
+        this.SearchedOrder = results.data;
+      } else {
+      }
+    }, err => {
+      this.apiService.Alert_Custom('Error occured while searching order');
+    });
+
+  }
+
+  SetOrderId(orderId: any) {
+
+    this.OrderId = orderId;
+    this.SearchedOrder = [];
+
   }
 
 }

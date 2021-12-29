@@ -65,7 +65,7 @@ export class ServiceProviderAccountComponent implements OnInit {
     this.toDate = new Date().toISOString().slice(0, 10);
 
 
-    this.getProvidersList(100, 1);
+    this.getProvidersList(100, 0);
     this.GetProviderAccountDetails();
   }
 

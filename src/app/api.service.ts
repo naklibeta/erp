@@ -50,7 +50,7 @@ export class ApiService {
 
 
   FormatDateMMDD(date: any) {
-    debugger
+
     let dateParsed = new Date(date);
     let year = dateParsed.getFullYear();
     let month = (1 + dateParsed.getMonth()).toString().padStart(2, '0');
@@ -59,6 +59,21 @@ export class ApiService {
     return month + '/' + day + '/' + year;
   }
 
+
+  JobStatus(status: any) {
+    if (status == 0) { return 'Open'; }
+    else if (status == 1) { return 'Accepted'; }
+    else if (status == 2) { return 'Quotation Sent to User'; }
+    else if (status == 3) { return 'Quotation Accepted'; }
+    else if (status == 4) { return 'Quotation Rejected'; }
+    else if (status == 5) { return 'Start Work'; }
+    else if (status == 6) { return 'End Work'; }
+    else if (status == 7) { return 'Order Cancelled'; }
+    else if (status == 8) { return 'Payment Received'; }
+    else if (status == 9) { return 'Refund Initiated'; }
+    else if (status == 10) { return 'Refund Processed'; }
+    else { return ''; }
+  }
 
 
 

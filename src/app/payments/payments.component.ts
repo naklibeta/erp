@@ -50,7 +50,7 @@ export class PaymentsComponent implements OnInit {
 
   ngOnInit(): void {
     // get datatable data
-    this.getPaymentsList(100, 1);
+    this.getPaymentsList(100, 0);
   }
 
   ngAfterViewInit(): void {

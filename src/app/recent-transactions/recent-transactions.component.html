@@ -44,13 +44,13 @@
                                 <th style="width: 50px;">Sr. No</th>
                                 <th style="width: 60px;">Order Id</th>
                                 <th>RZP Order Id</th>
-                                <th>RZP Payment Id</th>
+                                <!-- <th>RZP Payment Id</th>
 
                                 <th>RZP Payment Method</th>
                                 <th>CSGT%</th>
                                 <th>SGST%</th>
-                                <th>IGST%</th>
-                                <th>+ Tax</th>
+                                <th>IGST%</th> -->
+                                <th>+ Tax (CGST + SGST / IGST)</th>
                                 <th>Total</th>
                                 <th>Company Commission</th>
                                 <th>Provider Payment</th>
@@ -70,14 +70,14 @@
                                 <td>{{ i + 1 }}</td>
                                 <td (click)="open2(content2, person)"><strong>{{ person.job_orderId}}</strong></td>
 
-                                <td>{{ person.rzp_orderId}} </td>
-                                <td>{{ person.rzp_paymentId}} </td>
+                                <td> {{ person.rzp_orderId}} </td>
+                                <!-- <td>{{ person.rzp_paymentId}} </td> -->
 
-                                <td>{{ person.rzp_method }}</td>
+                                <!-- <td>{{ person.rzp_method }}</td>
 
                                 <td>{{ person.tax_percentage }}</td>
                                 <td>{{ person.tax_percentage2 }}</td>
-                                <td>{{ person.tax_percentage3 }}</td>
+                                <td>{{ person.tax_percentage3 }}</td> -->
                                 <td>₹{{ person.tax_amount }}</td>
                                 <td><strong>₹{{ person.total_amount }}</strong></td>
                                 <td>₹{{ person.company_commission }}</td>
@@ -129,8 +129,16 @@
 
                 <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
                     <label>Order Id</label>
-                    <input type="text" name="order_id" class="form-control" ngModel placeholder="Enter Order Id"
-                        required>
+                    <input type="text" (input)="fetchOrder($event.target.value)" name="order_id" class="form-control"
+                        [(ngModel)]="OrderId" placeholder="Enter Order Id" required>
+                </div>
+
+                <div class="order-search-list" *ngIf="SearchedOrder.length!=0">
+                    <ul>
+                        <li (click)="SetOrderId(order.orderId)" *ngFor="let order of SearchedOrder"> {{order.orderId}},
+                            {{order.cName}},
+                            {{apiService.FormatDateMMDD( order.date )}}</li>
+                    </ul>
                 </div>
 
                 <div class="col-sm-6 col-md-6 col-xl-6 mb-10">
@@ -194,6 +202,13 @@
                     <label>Order Id</label>
                     <input type="text" name="order_id" class="form-control" [(ngModel)]="PaymentDetailsEdit.job_orderId"
                         placeholder="Enter Order Id" required>
+                </div>
+
+                <div class="order-suggestions">
+                    <ul>
+                        <li *ngFor="let order of SearchedOrder"> {{order.orderId}}, {{order.cName}},
+                            {{apiService.FormatDateMMDD( order.date )}}</li>
+                    </ul>
                 </div>
 
                 <div class="col-sm-6 col-md-6 col-xl-6 mb-10">

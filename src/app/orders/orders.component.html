@@ -80,7 +80,7 @@
 
                                 <td>{{ person.city}} </td>
                                 <td>{{ person.state}} </td>
-                                <td>{{ person.status }}</td>
+                                <td><strong>{{ apiService.JobStatus(person.status) }}</strong></td>
                                 <td>{{ person.provider_id }}</td>
                                 <td *ngIf="person.is_paid == 0"> <i class="mdi mdi-close icon-status text-danger"></i>
                                 </td>
