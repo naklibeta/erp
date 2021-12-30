@@ -65,7 +65,8 @@
                         <tbody *ngIf="PaymentList.length!=0">
                             <tr *ngFor="let person of PaymentList;let i = index">
                                 <td>{{ i + 1 }}</td>
-                                <td (click)="open2(content2, person)"><strong>{{ person.job_orderId}}</strong></td>
+                                <td (click)="open2(content2, person)" class="id-cursor"><strong>{{
+                                        person.job_orderId}}</strong></td>
 
                                 <td> {{ person.rzp_orderId}} </td>
                                 <!-- <td>{{ person.rzp_paymentId}} </td> -->
@@ -82,7 +83,7 @@
                                 <td>{{ person.status}} </td>
                                 <td style="text-transform: uppercase;">{{ person.rzp_status}} </td>
                                 <td>{{ person.rzp_date }}</td>
-                                <td>
+                                <td class="d-flex px-2 py-3">
                                     <button *ngIf="person.rzp_status != 'refunded' " type="button"
                                         class="btn btn-primary btn-xs" (click)="Refund(person.rzp_orderId, 
                                         person.total_amount
@@ -93,8 +94,13 @@
                                         class="btn btn-success btn-xs">
                                         Refunded
                                     </button>
-                                    <a class="edit-icon" (click)="open4(content4, person)"> <i
-                                            class="mdi mdi-pencil-box-outline"> </i>
+                                    <a class="edit-icon ml-2" (click)="open4(content4, person)">
+                                        <!-- <i class="mdi mdi-pencil-box-outline"></i> -->
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <a class="edit-icon ml-2"
+                                        href="https://naklibeta.com/api/api/invoice/{{person.job_orderId}}">
+                                        <i class="far fa-list-alt"></i>
                                     </a>
                                 </td>
                             </tr>

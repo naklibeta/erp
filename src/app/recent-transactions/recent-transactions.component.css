@@ -17,6 +17,10 @@
     padding-bottom: 3px;
 }
 
+.id-cursor {
+    cursor: pointer;
+}
+
 .modal-heading {
     margin: auto;
 }

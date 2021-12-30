@@ -1,7 +1,7 @@
 <section class="content-header"></section>
 <div class="row datatable-content-class custom-tables">
 
-    <div class="col-xl-12">
+    <!-- <div class="col-xl-12">
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
@@ -22,30 +22,59 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="col-xl-12">
         <div class="container-fluid">
             <div class="card">
+
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6 col-xl-6">
 
+                        <div class="col-md-10 col-xl-10 m-auto">
+                            <div class="row">
+                                <div class="col-sm-4 col-xl-4 ">
+                                    <p class="payment-p">
+                                        <b>
+                                            No of Orders : {{PaymentList.length}}
+                                        </b>
+                                    </p>
+                                </div>
+                                <div class="col-sm-4 col-xl-4 ">
+                                    <p class="payment-p">
+                                        <b>
+                                            Total Payment Pending of : {{TotalPaymentClear}}/-
+                                        </b>
+                                    </p>
+                                </div>
+                                <div class="col-sm-4 col-xl-4 ">
+                                    <p class="payment-p">
+                                        <b>
+                                            No. Service Providers Payments : {{ServiceProviders}}
+                                        </b>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6 col-xl-6 text-right">
-                            <a> <button class="btn btn-success small-btn" type="button"
-                                    (click)="exportReportToExcel()">Export
-                                    <i class="mdi mdi-note-plus"></i></button> </a>
+
+                        <div class="col-md-2 col-xl-2 m-auto d-flex text-right">
+                            <a>
+                                <button class="btn btn-success small-btn" type="button" (click)="exportReportToExcel()">
+                                    Export <i class="mdi mdi-note-plus"></i>
+                                </button>
+                            </a>
                             &nbsp; &nbsp;
-                            <a> <button class="btn btn-primary small-btn" type="button" (click)="open3(content3)">Add
-                                    <i class="mdi mdi-note-plus"></i></button> </a>
+                            <a>
+                                <button class="btn btn-primary small-btn" type="button" (click)="open3(content3)">
+                                    Add <i class="mdi mdi-note-plus"></i>
+                                </button>
+                            </a>
                         </div>
+
                     </div>
-
-
                 </div>
-                <div class="card-body">
 
+                <div class="card-body">
                     <div class="search-div row">
 
                         <div class="col-xl-3 col-sm-3">
@@ -58,9 +87,7 @@
                         </div>
 
                         <div class="col-xl-9 col-sm-9 text-right">
-
                             <div style="position: relative;">
-
                                 <div class="provider-drop" *ngIf="ShowListing">
                                     <p (click)="SelectedProvider(provider.name, provider.id)"
                                         *ngFor="let provider of providerList"> {{provider.name}}</p>
@@ -68,13 +95,11 @@
                                     <p style="font-size: 10px;" *ngIf="providerList.length==0"> Provider not found using
                                         this name </p>
                                 </div>
-
                             </div>
 
                             <input placeholder="Provider Name" type="text" class="custom-input"
                                 [(ngModel)]="ProviderName" (input)="SearchSPName($event.target.value)">
                             &nbsp; &nbsp;
-
                             <input (input)="DateChange()" type="date" class="custom-input" [(ngModel)]="fromDate">
                             &nbsp; &nbsp;
                             <input (input)="DateChange()" type="date" class="custom-input" [(ngModel)]="toDate">
@@ -83,10 +108,7 @@
                                 (input)="SearchSP($event.target.value)">
                         </div>
 
-
-
                     </div>
-
 
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>
@@ -312,14 +334,15 @@
 
 
 <ng-template #content2 let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title">Payment Details</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+
+    <div class="modal-header py-2">
+        <h4 class="modal-title modal-heading">Payment Details</h4>
+        <button type="button" class="close cls-btn" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body">
 
+    <!-- <div class="modal-body">
 
         <div class="row details-content-view">
             <div class="col-sm-3 txt-details"> <strong>Customer Id:</strong></div>
@@ -403,12 +426,121 @@
 
         </div>
 
+    </div> -->
+
+    <div class="modal-body">
+
+        <div class="head-tag">General Details :</div>
+        <table class="table">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col" class="table-th table-bordered">Order Id</th>
+                    <th scope="col" class="table-th table-bordered">Customer Id</th>
+                    <th scope="col" class="table-th table-bordered">Customer Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="table-td table-bordered">{{PaymentDetails.job_orderId}}</td>
+                    <td class="table-td table-bordered">{{PaymentDetails.cId}}</td>
+                    <td class="table-td table-bordered">{{PaymentDetails.cName}}</td>
+                </tr>
+            </tbody>
+
+            <thead class="table-light">
+                <tr>
+                    <th scope="col" class="table-th table-bordered">Payment Id</th>
+                    <th scope="col" class="table-th table-bordered">Provider Id</th>
+                    <th scope="col" class="table-th table-bordered">SP Name</th>
+                    <th scope="col" class="table-th table-bordered">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="table-td table-bordered">{{PaymentDetails.id}}</td>
+                    <td class="table-td table-bordered">{{PaymentDetails.providerId}}</td>
+                    <td class="table-td table-bordered">{{PaymentDetails.sPName}}</td>
+                    <td class="table-td table-bordered">{{PaymentDetails.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="head-tag">Commission Details :</div>
+        <div class="row mb-4 mx-auto">
+
+            <div class="col-sm-3 col-th"> <strong>Company Percentage</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.company_percentage}} % </div>
+
+            <div class="col-sm-3 col-th"> <strong>Company Commission</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.company_commission}} ₹/- </div>
+
+            <div class="col-sm-3 col-th"> <strong>Provider Percentage</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.provider_percentage}} % </div>
+
+            <div class="col-sm-3 col-th"> <strong>Provider Commission</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.provider_commission}} ₹/- </div>
+        </div>
+
+        <div class="head-tag">Razor Pay Details :</div>
+        <div class="row mb-4 mx-auto">
+
+            <div class="col-sm-3 col-th"> <strong>Rzp OrderId</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.rzp_orderId}} </div>
+
+            <div class="col-sm-3 col-th"> <strong>RZP Trans. Date</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.rzp_date}} </div>
+
+            <div class="col-sm-3 col-th"> <strong>RZP Payment Id</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.rzp_payment}} </div>
+
+            <div class="col-sm-3 col-th"> <strong>RZP Status</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.rzp_status}} </div>
+
+            <div class="col-sm-3 col-th"> <strong>RZP Email</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.rzp_email}} </div>
+
+            <div class="col-sm-3 col-th"> <strong>RZP Description</strong></div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.rzp_description}} </div>
+
+            <div class="col-sm-3 col-th"> <strong>RZP Mobile</strong></div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.rzp_mobile}} </div>
+
+            <div class="col-sm-3 col-th"> <strong>RZP Card</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.rzp_card_id}} </div>
+
+            <div class="col-sm-3 col-th"> <strong>RZP Method</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.rzp_method}} </div>
+
+            <div class="col-sm-3 col-th"> <strong>RZP Signature</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.rzp_signature}} </div>
+        </div>
+
+        <div class="head-tag">Amount Details :</div>
+        <div class="row mx-auto">
+
+            <div class="col-sm-3 col-th"> <strong>Taxable Amount</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.taxable_amount}} ₹/- </div>
+
+            <div class="col-sm-3 col-th"> <strong>CGST%</strong></div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.tax_percentage}} % </div>
+
+            <div class="col-sm-3 col-th"> <strong>Tax Amount</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.tax_amount}} ₹/- </div>
+
+            <div class="col-sm-3 col-th"> <strong>SGST%</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.tax_percentage2}} % </div>
+
+            <div class="col-sm-3 col-th"> <strong>Total Amount</strong> </div>
+            <div class="col-sm-3 col-td"> {{PaymentDetails.total_amount}} ₹/- </div>
+        </div>
+
     </div>
 
 
+    <div class="modal-footer justify-content-center py-2">
+        <button type="button" class="btn btn-inverse rounded" (click)="modal.dismiss('Cross click')">Close</button>
+    </div>
 
-    <div class="modal-footer"><button type="button" class="btn btn-inverse"
-            (click)="modal.dismiss('Cross click')">Close</button></div>
 </ng-template>
 
 <!-- <button class="btn btn-lg btn-outline-primary" (click)="open2(content2)">Launch demo modal</button> -->
