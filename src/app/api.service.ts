@@ -10,6 +10,10 @@ import { environment } from '../environments/environment';
 })
 export class ApiService {
 
+  isDown: boolean = false;
+  startX: any;
+  scrollLeft: any;
+
   constructor(public http: HttpClient) {
   }
 
@@ -75,7 +79,32 @@ export class ApiService {
     else { return ''; }
   }
 
+  dragTableFeature(tablename: any) {
+    const cardBody = document.getElementById(tablename);
 
+    cardBody?.addEventListener('mousedown', (e) => {
+      this.isDown = true;
+      cardBody.classList.add('active');
+      this.startX = e.pageX - cardBody.offsetLeft;
+      this.scrollLeft = cardBody.scrollLeft;
+    });
 
+    cardBody?.addEventListener('mouseleave', () => {
+      this.isDown = false;
+      cardBody.classList.remove('active');
+    });
+
+    cardBody?.addEventListener('mouseup', () => {
+      this.isDown = false;
+      cardBody.classList.remove('active');
+    });
+
+    cardBody?.addEventListener('mousemove', (e) => {
+      e.preventDefault();
+      const x = e.pageX - cardBody.offsetLeft;
+      const walk = (x - this.startX) * 3;
+      cardBody.scrollLeft = walk;
+    });
+  }
 
 }

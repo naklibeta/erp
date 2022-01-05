@@ -34,6 +34,9 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     // get datatable data
     this.getProvidersList(100, 0);
+
+    //horizontal view(auto scroll) in table
+    this.apiService.dragTableFeature('orders-box');
   }
 
   ngAfterViewInit(): void {

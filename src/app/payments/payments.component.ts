@@ -1,6 +1,7 @@
 
 import { ChangeDetectorRef, Component, ComponentFactoryResolver, OnInit, ViewChild } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { count } from 'rxjs-compat/operator/count';
 import { ApiService } from '../api.service';
 
 declare var TableToExcel: any;
@@ -12,7 +13,15 @@ declare var $: any;
   templateUrl: './payments.component.html',
   styleUrls: ['./payments.component.css']
 })
+
 export class PaymentsComponent implements OnInit {
+
+  // isDown: boolean = false;
+  // startX: any;
+  // scrollLeft: any;
+
+  scrollTop = 100;
+  // scrollLeft = 150;
 
   isLoading: boolean = false;
   //private sub = new SubSink();
@@ -44,13 +53,17 @@ export class PaymentsComponent implements OnInit {
     private modalService: NgbModal,
     private componentFactoryResolver: ComponentFactoryResolver
   ) {
-
     this.setWeekDates();
   }
 
   ngOnInit(): void {
+
     // get datatable data
     this.getPaymentsList(100, 0);
+
+    //horizontal view(auto scroll) in table
+    this.apiService.dragTableFeature('payments-box');
+
   }
 
   ngAfterViewInit(): void {
@@ -133,9 +146,6 @@ export class PaymentsComponent implements OnInit {
     });
 
   }
-
-
-
 
 
   Rows(KeyRows: any) {

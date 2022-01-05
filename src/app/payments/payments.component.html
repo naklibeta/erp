@@ -36,21 +36,27 @@
                                 <div class="col-sm-4 col-xl-4 ">
                                     <p class="payment-p">
                                         <b>
-                                            No of Orders : {{PaymentList.length}}
+                                            <strong>
+                                                No of Orders : {{PaymentList.length}}
+                                            </strong>
                                         </b>
                                     </p>
                                 </div>
                                 <div class="col-sm-4 col-xl-4 ">
                                     <p class="payment-p">
                                         <b>
-                                            Total Payment Pending of : {{TotalPaymentClear}}/-
+                                            <strong>
+                                                Total Payment Pending of : {{TotalPaymentClear}}/-
+                                            </strong>
                                         </b>
                                     </p>
                                 </div>
                                 <div class="col-sm-4 col-xl-4 ">
                                     <p class="payment-p">
                                         <b>
-                                            No. Service Providers Payments : {{ServiceProviders}}
+                                            <strong>
+                                                No. Service Providers Payments : {{ServiceProviders}}
+                                            </strong>
                                         </b>
                                     </p>
                                 </div>
@@ -74,7 +80,8 @@
                     </div>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body" id="payments-box">
+
                     <div class="search-div row">
 
                         <div class="col-xl-3 col-sm-3">
@@ -92,7 +99,8 @@
                                     <p (click)="SelectedProvider(provider.name, provider.id)"
                                         *ngFor="let provider of providerList"> {{provider.name}}</p>
 
-                                    <p style="font-size: 10px;" *ngIf="providerList.length==0"> Provider not found using
+                                    <p style="font-size: 10px;" *ngIf="providerList.length==0"> Provider not found
+                                        using
                                         this name </p>
                                 </div>
                             </div>
@@ -131,7 +139,8 @@
                                 <th><i class="mdi mdi-arrow-up-bold"
                                         (click)="customSorting('up', 'provider_commission')"> </i>
                                     <i class="mdi mdi-arrow-down-bold"
-                                        (click)="customSorting('down', 'provider_commission') "> </i>Provider Payment
+                                        (click)="customSorting('down', 'provider_commission') "> </i>Provider
+                                    Payment
                                 </th>
                                 <th>SP. Paid</th>
                                 <!-- <th>Status</th> -->
@@ -157,7 +166,8 @@
                         <tbody *ngIf="PaymentList.length!=0">
                             <tr *ngFor="let person of PaymentList;let i = index">
                                 <td>{{ i + 1 }}</td>
-                                <td (click)="open2(content2, person)"><strong>{{ person.job_orderId}}</strong></td>
+                                <td (click)="open2(content2, person)" class="order-id"><strong>{{
+                                        person.job_orderId}}</strong></td>
                                 <td>{{ person.sPName}} </td>
                                 <td>{{ person.cName}} </td>
 
@@ -181,24 +191,143 @@
                                 <!-- <td>{{ person.status}} </td> -->
                                 <td style="text-transform: uppercase;">{{ person.rzp_status}} </td>
                                 <td>{{ person.rzp_date }}</td>
-                                <td>
+                                <td class="py-4 d-flex">
                                     <button *ngIf="person.rzp_status != 'refunded' " type="button"
                                         class="btn btn-primary btn-xs" (click)="Refund(person.rzp_orderId, 
-                                        person.total_amount
-                                        )">
+                                            person.total_amount
+                                            )">
                                         Refund
                                     </button>
                                     <button *ngIf="person.rzp_status == 'refunded' " type="button"
                                         class="btn btn-success btn-xs">
                                         Refunded
                                     </button>
-                                    <a class="edit-icon" (click)="open4(content4, person)"> <i
+                                    <a class="edit-icon ml-2" (click)="open4(content4, person)"> <i
                                             class="mdi mdi-pencil-box-outline"> </i>
                                     </a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+
+
+
+
+                    <!-- sample design -->
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Sr. No</th>
+                                <th>Order Id</th>
+
+                                <th>Customer Name</th>
+
+                                <th>CSGT%</th>
+                                <th>SGST%</th>
+                                <th>IGST%</th>
+                                <th>Total Tax</th>
+
+                                <th>
+                                    <i class="mdi mdi-arrow-up-bold"
+                                        (click)="customSorting('up', 'provider_commission')"> </i>
+                                    <i class="mdi mdi-arrow-down-bold"
+                                        (click)="customSorting('down', 'provider_commission') "> </i>
+                                    Service Provider Payment
+                                </th>
+
+                                <th>Company Commission</th>
+                                <th>Total Amount</th>
+
+                                <th>Service Provider Name</th>
+                                <th>Service Provider Paid</th>
+                                <!-- <th>RZP Order Id</th> -->
+                                <th>RZP Payment Id</th>
+                                <!-- <th>RZP Payment Method</th> -->
+                                <!-- <th>Status</th> -->
+
+                                <th>
+                                    <i class="mdi mdi-arrow-up-bold" (click)="customSorting('up', 'rzp_date')"></i>
+                                    <i class="mdi mdi-arrow-down-bold" (click)="customSorting('down', 'rzp_date') "></i>
+                                    RZP Payment Date
+                                </th>
+
+                                <th>RZP Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+
+
+                        <tbody *ngIf="PaymentList.length==0">
+                            <tr *ngIf="!NoRecords">
+                                <td class="text-center font-italic" colspan="16">Fetching records, please wait</td>
+                            </tr>
+                            <tr *ngIf="NoRecords">
+                                <td class="text-center font-italic" colspan="16"> No payment records found </td>
+                            </tr>
+                        </tbody>
+
+
+
+                        <tbody *ngIf="PaymentList.length!=0">
+                            <tr *ngFor="let person of PaymentList;let i = index">
+                                <td>{{ i + 1 }}</td>
+
+                                <td (click)="open2(content2, person)" class="order-id">
+                                    <strong>{{person.job_orderId}}</strong>
+                                </td>
+
+                                <td>{{ person.cName}} </td>
+
+                                <td>{{ person.tax_percentage }}</td>
+                                <td>{{ person.tax_percentage2 }}</td>
+                                <td>{{ person.tax_percentage3 }}</td>
+                                <td>₹{{ person.tax_amount }}</td>
+
+                                <td>₹{{ person.provider_commission }}</td>
+                                <td>₹{{ person.company_commission }}</td>
+                                <td><strong>₹{{ person.total_amount }}</strong></td>
+
+                                <td>{{ person.sPName}} </td>
+
+                                <td *ngIf="person.sp_paid==1">
+                                    <i class="mdi mdi-account-check text-success md-font">
+                                    </i>
+                                </td>
+                                <td *ngIf="person.sp_paid==0">
+                                    <i class="mdi mdi-close-box-outline text-danger md-font">
+                                    </i>
+                                </td>
+
+                                <!-- <td>{{ person.rzp_orderId}} </td> -->
+                                <td>{{ person.rzp_paymentId}} </td>
+                                <!-- <td>{{ person.rzp_method }}</td> -->
+                                <!-- <td>{{ person.status}} </td> -->
+                                <td>{{ person.rzp_date }}</td>
+                                <td style="text-transform: uppercase;">{{ person.rzp_status}} </td>
+
+                                <td class="py-4 d-flex">
+                                    <button *ngIf="person.rzp_status != 'refunded' " type="button"
+                                        class="btn btn-primary btn-xs" (click)="Refund(person.rzp_orderId, 
+                                            person.total_amount
+                                            )">
+                                        Refund
+                                    </button>
+                                    <button *ngIf="person.rzp_status == 'refunded' " type="button"
+                                        class="btn btn-success btn-xs">
+                                        Refunded
+                                    </button>
+                                    <a class="edit-icon ml-2" (click)="open4(content4, person)"> <i
+                                            class="mdi mdi-pencil-box-outline"> </i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+
                 </div>
             </div>
         </div>

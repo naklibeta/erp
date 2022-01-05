@@ -43,6 +43,9 @@ export class RecentTransactionsComponent implements OnInit {
   ngOnInit(): void {
     // get datatable data
     this.getPaymentsList(100, 0);
+
+    //horizontal view(auto scroll) in table
+    this.apiService.dragTableFeature('transaction-box');
   }
 
   ngAfterViewInit(): void {

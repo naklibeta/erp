@@ -47,6 +47,10 @@
     padding: 5px;
 }
 
+.order-id {
+    cursor: pointer;
+}
+
 .col-th {
     background: #fdfdfe;
     border: 1px solid #dee2e6;

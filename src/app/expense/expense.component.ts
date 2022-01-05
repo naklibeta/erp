@@ -41,6 +41,9 @@ export class ExpenseComponent implements OnInit {
   ngOnInit(): void {
     // get datatable data
     this.getExpenseList(100, 0);
+
+    //horizontal view(auto scroll) in table
+    this.apiService.dragTableFeature('expense-box');
   }
 
   ngAfterViewInit(): void {
